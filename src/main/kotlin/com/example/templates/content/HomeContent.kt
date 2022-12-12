@@ -1,0 +1,90 @@
+package com.example.templates.content
+
+import com.example.models.SpaceTrack.STSatelliteCatalog
+import io.ktor.server.html.*
+import kotlinx.html.FlowContent
+import kotlinx.html.*
+
+class HomeContent: Template<FlowContent> {
+    lateinit var sat : STSatelliteCatalog
+
+    override fun FlowContent.apply() {
+        header("bg-dark py-5") {
+            div("container px-5") {
+                div("row gx-5 align-items-center justify-content-center") {
+                    div("col-lg-8 col-xl-7 col-xxl-6") {
+                        div("my-5 text-center text-xl-start") {
+                            h1("display-5 fw-bolder text-white mb-2") { +"""Spotting satellites has never been easier""" }
+                            p("lead fw-normal text-white-50 mb-4") { +"""Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!""" }
+                            div("d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start") {
+                                a(classes = "btn btn-primary btn-lg px-4 me-sm-3") {
+                                    href = "/create_account"
+                                    +"""Get Started"""
+                                }
+                                a(classes = "btn btn-outline-light btn-lg px-4") {
+                                    href = "https://en.wikipedia.org/wiki/Satellite_watching"
+                                    +"""Sign In"""
+                                }
+                            }
+                        }
+                    }
+                    div("col-xl-5 col-xxl-6 d-none d-xl-block text-center") {
+                        img(classes = "img-fluid rounded-3 my-5") {
+                            //src = "https://wallup.net/wp-content/uploads/2015/12/220144-ALMA_Observatory-Chile-space-starry_night-Atacama_Desert-technology-galaxy-landscape.jpg"
+                            src = "https://img.theculturetrip.com/1440x/smart/wp-content/uploads/2017/09/13986527890_364f4d138a_o.jpg"
+                            alt = "..."
+                        }
+                    }
+                }
+            }
+        }
+        // Features section-->"""
+        section("py-5") {
+            id = "features"
+            div("container px-5 my-5") {
+                div("row gx-5") {
+                    div("col-lg-4 mb-5 mb-lg-0") {
+                        h2("fw-bolder mb-0") { +"""Features that you will like""" }
+                    }
+                    div("col-lg-8") {
+                        div("row gx-5 row-cols-1 row-cols-md-2") {
+                            div("col mb-5 h-100") {
+                                div("feature bg-primary bg-gradient text-white rounded-3 mb-3") {
+                                    i("bi bi-envelope-fill") {
+                                    }
+                                }
+                                h2("h5") { +"""Email notifications""" }
+                                p("mb-0") { +"""Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.""" }
+                            }
+                            div("col mb-5 h-100") {
+                                div("feature bg-primary bg-gradient text-white rounded-3 mb-3") {
+                                    i("bi bi-cloud-arrow-up") {
+                                    }
+                                }
+                                h2("h5") { +"""Upload your images""" }
+                                p("mb-0") { +"""Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.""" }
+                            }
+                            div("col mb-5 mb-md-0 h-100") {
+                                div("feature bg-primary bg-gradient text-white rounded-3 mb-3") {
+                                    i("bi bi-toggles2") {
+                                    }
+                                }
+                                h2("h5") { +"""Featured title""" }
+                                p("mb-0") { +"""Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.""" }
+                            }
+                            div("col h-100") {
+                                div("feature bg-primary bg-gradient text-white rounded-3 mb-3") {
+                                    i("bi bi-toggles2") {
+                                    }
+                                }
+                                h2("h5") { +"""Featured title""" }
+                                p("mb-0") { +"""Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.""" }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

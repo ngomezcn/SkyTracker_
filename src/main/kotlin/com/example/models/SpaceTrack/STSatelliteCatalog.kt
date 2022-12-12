@@ -1,0 +1,47 @@
+package com.example.models.SpaceTrack
+
+import kotlinx.serialization.SerialName
+
+@kotlinx.serialization.Serializable
+class STSatelliteCatalog (
+    @SerialName("CCSDS_OMM_VERS"      ) var CCSDSOMMVERS       : String? = null,
+    @SerialName("COMMENT"             ) var COMMENT            : String? = null,
+    @SerialName("CREATION_DATE"       ) var CREATIONDATE       : String? = null,
+    @SerialName("ORIGINATOR"          ) var ORIGINATOR         : String? = null,
+    @SerialName("OBJECT_NAME"         ) var OBJECTNAME         : String? = null,
+    @SerialName("OBJECT_ID"           ) var OBJECTID           : String? = null,
+    @SerialName("CENTER_NAME"         ) var CENTERNAME         : String? = null,
+    @SerialName("REF_FRAME"           ) var REFFRAME           : String? = null,
+    @SerialName("TIME_SYSTEM"         ) var TIMESYSTEM         : String? = null,
+    @SerialName("MEAN_ELEMENT_THEORY" ) var MEANELEMENTTHEORY  : String? = null,
+    @SerialName("EPOCH"               ) var EPOCH              : String? = null,
+    @SerialName("MEAN_MOTION"         ) var MEANMOTION         : String? = null,
+    @SerialName("ECCENTRICITY"        ) var ECCENTRICITY       : String? = null,
+    @SerialName("INCLINATION"         ) var INCLINATION        : String? = null,
+    @SerialName("RA_OF_ASC_NODE"      ) var RAOFASCNODE        : String? = null,
+    @SerialName("ARG_OF_PERICENTER"   ) var ARGOFPERICENTER    : String? = null,
+    @SerialName("MEAN_ANOMALY"        ) var MEANANOMALY        : String? = null,
+    @SerialName("EPHEMERIS_TYPE"      ) var EPHEMERISTYPE      : String? = null,
+    @SerialName("CLASSIFICATION_TYPE" ) var CLASSIFICATIONTYPE : String? = null,
+    @SerialName("NORAD_CAT_ID"        ) var NORADCATID         : String? = null,
+    @SerialName("ELEMENT_SET_NO"      ) var ELEMENTSETNO       : String? = null,
+    @SerialName("REV_AT_EPOCH"        ) var REVATEPOCH         : String? = null,
+    @SerialName("BSTAR"               ) var BSTAR              : String? = null,
+    @SerialName("MEAN_MOTION_DOT"     ) var MEANMOTIONDOT      : String? = null,
+    @SerialName("MEAN_MOTION_DDOT"    ) var MEANMOTIONDDOT     : String? = null,
+    @SerialName("SEMIMAJOR_AXIS"      ) var SEMIMAJORAXIS      : String? = null,
+    @SerialName("PERIOD"              ) var PERIOD             : String? = null,
+    @SerialName("APOAPSIS"            ) var APOAPSIS           : String? = null,
+    @SerialName("PERIAPSIS"           ) var PERIAPSIS          : String? = null,
+    @SerialName("OBJECT_TYPE"         ) var OBJECTTYPE         : String? = null,
+    @SerialName("RCS_SIZE"            ) var RCSSIZE            : String? = null,
+    @SerialName("COUNTRY_CODE"        ) var COUNTRYCODE        : String? = null,
+    @SerialName("LAUNCH_DATE"         ) var LAUNCHDATE         : String? = null,
+    @SerialName("SITE"                ) var SITE               : String? = null,
+    @SerialName("DECAY_DATE"          ) var DECAYDATE          : String? = null,
+    @SerialName("FILE"                ) var FILE               : String? = null,
+    @SerialName("GP_ID"               ) var GPID               : String? = null,
+    @SerialName("TLE_LINE0"           ) var TLELINE0           : String? = null,
+    @SerialName("TLE_LINE1"           ) var TLELINE1           : String? = null,
+    @SerialName("TLE_LINE2"           ) var TLELINE2           : String? = null
+)
