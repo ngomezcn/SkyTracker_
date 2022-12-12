@@ -24,11 +24,6 @@ fun Route.apiRouting() {
                 println(e)
             }
 
-            //val serializer = Json{
-            //    ignoreUnknownKeys = true
-            // }
-            // val a = serializer.decodeFromString<CreateAccount>(recv.trimIndent())
-            //println(a)
             call.respondText("User created correctly", status = HttpStatusCode.Created)
         }
 

@@ -1,5 +1,6 @@
 package com.example.plugins
 
+import com.example.models.login.customerRouting
 import com.example.routes.api.apiRouting
 import com.example.routes.web.webRouting
 import io.ktor.server.routing.*
@@ -22,5 +23,6 @@ fun Application.configureRouting() {
 
         apiRouting()
         webRouting()
+        customerRouting()
     }
 }
