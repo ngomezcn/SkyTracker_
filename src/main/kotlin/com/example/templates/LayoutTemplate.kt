@@ -51,7 +51,7 @@ class LayoutTemplate: Template<HTML> {
             }
             link {
                 rel = "stylesheet"
-                href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"
+                href = "https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-alpha.2/css/bootstrap.min.css"
                 attributes["integrity"] = "sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd"
                 attributes["crossorigin"] = "anonymous"
             }
@@ -69,7 +69,9 @@ class LayoutTemplate: Template<HTML> {
                 WebRoutesEnum.view_satellite.route -> insert(ViewSatelliteContent(), viewSatelliteContent)
                 WebRoutesEnum.create_account.route -> insert(CreateAccountContent(), createAccountContent)
             }
-            insert(FooterContent(), footerContent)
+            if(route != WebRoutesEnum.satellites.route) {
+                insert(FooterContent(), footerContent)
+            }
         }
     }
 }

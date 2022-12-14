@@ -14,8 +14,8 @@ object ORM {
     lateinit var db : Database
 
     fun connect() {
-        //db = Database.connect("jdbc:postgresql://localhost:5432/postgres", driver = "com.impossibl.postgres.jdbc.PGDriver", user = "postgres", password = "1234")
-        db = Database.connect("jdbc:pgsql://localhost:5432/template1", driver = "com.impossibl.postgres.jdbc.PGDriver", user = "sjo", password = "p4ssword!")
+        db = Database.connect("jdbc:postgresql://localhost:5432/postgres", driver = "com.impossibl.postgres.jdbc.PGDriver", user = "postgres", password = "1234")
+       // db = Database.connect("jdbc:pgsql://localhost:5432/template1", driver = "com.impossibl.postgres.jdbc.PGDriver", user = "sjo", password = "p4ssword!")
     }
 
     fun createSchemas() {
