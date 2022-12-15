@@ -26,6 +26,5 @@ fun Route.apiRouting() {
 
             call.respondText("User created correctly", status = HttpStatusCode.Created)
         }
-
     }
 }

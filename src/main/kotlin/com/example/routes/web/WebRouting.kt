@@ -52,6 +52,7 @@ fun Route.webRouting() {
                 }
             }
         }
+
         get(WebRoutesEnum.view_satellite.toString()) {
             var id  = ""
             var selectedSat : SatelliteDAO? = null

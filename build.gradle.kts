@@ -33,6 +33,7 @@ dependencies {
     implementation("io.ktor:ktor-server-html-builder:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
 
+
     implementation("com.h2database:h2:2.1.214")
     implementation("org.slf4j:slf4j-simple:2.0.3")
     implementation("com.impossibl.pgjdbc-ng", "pgjdbc-ng", "0.8.3")

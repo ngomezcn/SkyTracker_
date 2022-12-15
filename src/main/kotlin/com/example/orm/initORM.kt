@@ -14,8 +14,15 @@ object ORM {
     lateinit var db : Database
 
     fun connect() {
-        db = Database.connect("jdbc:postgresql://localhost:5432/postgres", driver = "com.impossibl.postgres.jdbc.PGDriver", user = "postgres", password = "1234")
-       // db = Database.connect("jdbc:pgsql://localhost:5432/template1", driver = "com.impossibl.postgres.jdbc.PGDriver", user = "sjo", password = "p4ssword!")
+        // Windows prod
+        //db = Database.connect("jdbc:postgresql://localhost:5432/postgres", driver = "com.impossibl.postgres.jdbc.PGDriver", user = "postgres", password = "1234")
+
+        // Linux prod
+        //db = Database.connect("jdbc:pgsql://localhost:5432/template1", driver = "com.impossibl.postgres.jdbc.PGDriver", user = "sjo", password = "p4ssword!")
+
+        // Linux/Windows dev
+        db = Database.connect("jdbc:h2:mem:regular;DB_CLOSE_DELAY=-1;", "org.h2.Driver")
+
     }
 
     fun createSchemas() {
@@ -32,11 +39,13 @@ object ORM {
         transaction {
             addLogger(StdOutSqlLogger)
 
-            if(SatelliteDAO.all().count() < 100) {
+            //if(SatelliteDAO.all().count() < 100) {
+            if(true) {
 
                 // Cargamos los sats desde un fichero o desde la api, por el momento lo dejo en el fichero porque son bastantes datos
                 //satellitesList = Repository().getAllSatellites()
                 var satellitesList = Json.decodeFromString<List<STSatelliteCatalog>>(File("sats.json").readText(Charsets.UTF_8))
+
                 satellitesList = satellitesList!!.sortedBy { it.NORADCATID!!.toInt() }
 
                 for (sat in satellitesList!!) {
