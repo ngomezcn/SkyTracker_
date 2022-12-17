@@ -40,6 +40,8 @@ fun Route.webRouting() {
                     call.respondRedirect("/satellites")
             }
 
+
+
             call.respondHtmlTemplate(LayoutTemplate()) {
                 route = WebRoutesEnum.satellites.route
 

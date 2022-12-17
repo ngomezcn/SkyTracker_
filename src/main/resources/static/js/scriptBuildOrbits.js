@@ -1,5 +1,27 @@
 var ui = null
-/// Solo eliminar lo de abajo
+
+function fadeOutEffect() {
+
+    var fadeTarget = document.getElementById('loading');
+    fadeTarget.remove()
+    document.getElementById('satListPanel').style.opacity = 1;
+
+    /*var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+            fadeTarget.style.opacity = 1;
+        }
+        if (fadeTarget.style.opacity > 0) {
+            fadeTarget.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 100);*/
+}
+function test1() {
+    fadeOutEffect()
+} setTimeout(test1, 3100);
+
+/// He editado cosas abajo
 
 var container = document.querySelector("#unity-container");
 var canvas = document.querySelector("#unity-canvas");
