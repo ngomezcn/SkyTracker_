@@ -1,9 +1,14 @@
 package com.example.templates.content
 
 import com.example.models.SpaceTrack.STSatelliteCatalog
+import com.example.orm.models.SatelliteDAO
+import com.example.orm.models.SatellitesTable
 import io.ktor.server.html.*
 import kotlinx.html.FlowContent
 import kotlinx.html.*
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.TransactionManager
+import org.jetbrains.exposed.sql.transactions.transaction
 
 class HomeContent: Template<FlowContent> {
     lateinit var sat : STSatelliteCatalog
@@ -22,7 +27,7 @@ class HomeContent: Template<FlowContent> {
                                     +"""Get Started"""
                                 }
                                 a(classes = "btn btn-outline-light btn-lg px-4") {
-                                    href = "https://en.wikipedia.org/wiki/Satellite_watching"
+                                    href = "/sign_in"
                                     +"""Sign In"""
                                 }
                             }
@@ -38,6 +43,58 @@ class HomeContent: Template<FlowContent> {
                 }
             }
         }
+
+/* CONSULTA SQL PARA MOSTRAR EL NUMERO DE SATS EN CADA ORBITA
+SELECT CASE
+    WHEN (SUBSTRING("tleLine2", 53, 4)::double precision) <= 1  THEN 'HEO'
+    WHEN (SUBSTRING("tleLine2", 53, 4)::double precision) <= 11 THEN 'MEO'
+    WHEN (SUBSTRING("tleLine2", 53, 4)::double precision) > 11  THEN 'LEO'
+        ELSE 'Others'
+    END AS Orbit_category,
+    count(id) AS total_num
+FROM   satellites
+GROUP  BY CASE
+    WHEN (SUBSTRING("tleLine2", 53, 4)::double precision) <= 1  THEN 'HEO'
+    WHEN (SUBSTRING("tleLine2", 53, 4)::double precision) <= 11 THEN 'MEO'
+    WHEN (SUBSTRING("tleLine2", 53, 4)::double precision) > 11  THEN 'LEO'
+        ELSE 'Others'
+END;
+*/
+
+        var leoCount = 0
+        var meoCount = 0
+        var heoCount = 0
+
+        transaction {
+            exec("SELECT CASE " +
+                    "    WHEN (SUBSTRING(\"tleLine2\", 53, 4)::double precision) <= 1  THEN 'HEO' " +
+                    "    WHEN (SUBSTRING(\"tleLine2\", 53, 4)::double precision) <= 11 THEN 'MEO' " +
+                    "    WHEN (SUBSTRING(\"tleLine2\", 53, 4)::double precision) > 11  THEN 'LEO' " +
+                    "        ELSE 'Others' " +
+                    "    END AS Orbit_category, " +
+                    "    count(id) AS total_count " +
+                    "FROM satellites " +
+                    "GROUP  BY CASE " +
+                    "    WHEN (SUBSTRING(\"tleLine2\", 53, 4)::double precision) <= 1  THEN 'HEO' " +
+                    "    WHEN (SUBSTRING(\"tleLine2\", 53, 4)::double precision) <= 11 THEN 'MEO' " +
+                    "    WHEN (SUBSTRING(\"tleLine2\", 53, 4)::double precision) > 11  THEN 'LEO' " +
+                    "        ELSE 'Others' " +
+                    "END; ") {
+
+                while (it.next()) {
+                    when(it.getString("orbit_category")) {
+                        "LEO" -> leoCount = it.getInt("total_count")
+                        "MEO" -> meoCount = it.getInt("total_count")
+                        "HEO" -> heoCount = it.getInt("total_count")
+                    }
+                }
+            }
+        }
+
+        println(leoCount)
+        println(meoCount)
+        println(heoCount)
+
         // Features section-->"""
         section("py-5") {
             id = "features"

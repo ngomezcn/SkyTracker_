@@ -1,8 +1,10 @@
 package com.example.orm
 
 import com.example.models.SpaceTrack.STSatelliteCatalog
+import com.example.orm.models.SatCommentTable
 import com.example.orm.models.SatelliteDAO
-import com.example.orm.models.Satellites
+import com.example.orm.models.SatellitesTable
+import com.example.orm.models.UsersTable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.*
@@ -44,7 +46,9 @@ object ORM {
         transaction {
             addLogger(StdOutSqlLogger)
 
-            SchemaUtils.create(Satellites)
+            SchemaUtils.create(SatellitesTable)
+            SchemaUtils.create(SatCommentTable)
+            SchemaUtils.create(UsersTable)
         }
     }
 
@@ -54,8 +58,9 @@ object ORM {
         transaction {
             addLogger(StdOutSqlLogger)
 
+
             if(SatelliteDAO.all().count() < 100) {
-            //if(true) {
+                SatellitesTable.dropStatement()
 
                 // Cargamos los sats desde un fichero o desde la api, por el momento lo dejo en el fichero porque son bastantes datos
                 //satellitesList = Repository().getAllSatellites()

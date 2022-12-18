@@ -1,10 +1,8 @@
 package com.example.routes.web
 
-import com.example.models.SpaceTrack.STSatelliteCatalog
 import com.example.orm.models.SatelliteDAO
-import com.example.orm.models.Satellites
+import com.example.orm.models.SatellitesTable
 import com.example.templates.LayoutTemplate
-import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*
 import io.ktor.server.response.*
@@ -29,6 +27,12 @@ fun Route.webRouting() {
             }
         }
 
+        get(WebRoutesEnum.sign_in.toString()) {
+            call.respondHtmlTemplate(LayoutTemplate()) {
+                route =  WebRoutesEnum.sign_in.route
+            }
+        }
+
         get(WebRoutesEnum.satellites.toString()) {
             var requestedPage : Int? = null
 
@@ -39,8 +43,6 @@ fun Route.webRouting() {
                 if(requestedPage.toInt() < 1)
                     call.respondRedirect("/satellites")
             }
-
-
 
             call.respondHtmlTemplate(LayoutTemplate()) {
                 route = WebRoutesEnum.satellites.route
@@ -66,9 +68,9 @@ fun Route.webRouting() {
 
                 transaction {
 
-                    val temp = SatelliteDAO.find { Satellites.noradCatId eq id }
+                    val temp = SatelliteDAO.find { SatellitesTable.noradCatId eq id }
                     if(!temp.empty()) {
-                        selectedSat = SatelliteDAO.find { Satellites.noradCatId eq id }.first()
+                        selectedSat = SatelliteDAO.find { SatellitesTable.noradCatId eq id }.first()
                     }
                 }
                 if(selectedSat == null) {

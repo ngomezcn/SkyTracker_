@@ -5,4 +5,5 @@ enum class WebRoutesEnum(val route: String, val title: String) {
     satellites("satellites", "Satellites"),
     view_satellite("view_satellite", ""),
     create_account("create_account", "Create Account"),
+    sign_in("sign_in", "Sign In"),
 }

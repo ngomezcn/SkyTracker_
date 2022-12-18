@@ -1,5 +1,6 @@
 package com.example.templates.content
 
+import com.example.loggedUser
 import io.ktor.server.html.*
 import kotlinx.html.*
 
@@ -43,7 +44,10 @@ class NavigationContent: Template<FlowContent> {
                                 +"""API"""
                             }
                         }
+
+
                         li("nav-item dropdown") {
+
                             a(classes = "nav-link dropdown-toggle") {
                                 id = "navbarDropdownBlog"
                                 href = "#"
@@ -54,16 +58,32 @@ class NavigationContent: Template<FlowContent> {
                             }
                             ul("dropdown-menu dropdown-menu-end") {
                                 attributes["aria-labelledby"] = "navbarDropdownBlog"
-                                li {
-                                    a(classes = "dropdown-item") {
-                                        href = "account/tracking_list"
-                                        +"""My tracking list"""
+                                if(loggedUser != null)
+                                {
+                                    li {
+                                        a(classes = "dropdown-item") {
+                                            +"""${loggedUser!!.surname}"""
+                                        }
                                     }
-                                }
-                                li {
-                                    a(classes = "dropdown-item") {
-                                        href = "account/settings"
-                                        +"""Settings"""
+                                    li {
+                                        a(classes = "dropdown-item") {
+                                            href = "account/tracking_list"
+                                            +"""My tracking list"""
+                                        }
+                                    }
+                                    li {
+                                        a(classes = "dropdown-item") {
+                                            href = "account/settings"
+                                            +"""Settings"""
+                                        }
+                                    }
+                                } else
+                                {
+                                    li {
+                                        a(classes = "dropdown-item") {
+                                            href = "sign_in"
+                                            +"""Sign In"""
+                                        }
                                     }
                                 }
                             }

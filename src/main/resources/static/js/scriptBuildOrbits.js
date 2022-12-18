@@ -1,6 +1,6 @@
 var ui = null
 
-function fadeOutEffect() {
+function onLoad() {
 
     var fadeTarget = document.getElementById('loading');
     fadeTarget.remove()
@@ -17,9 +17,9 @@ function fadeOutEffect() {
         }
     }, 100);*/
 }
-function test1() {
-    fadeOutEffect()
-} setTimeout(test1, 3100);
+function onLoadDelayed() {
+    onLoad()
+} setTimeout(onLoadDelayed, 3000);
 
 /// He editado cosas abajo
 

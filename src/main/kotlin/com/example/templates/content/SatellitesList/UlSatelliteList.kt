@@ -10,13 +10,8 @@ class UlSatelliteList(private val sats: List<SatelliteDAO>): Template<FlowConten
         link(rel = "stylesheet", href = "css/satList.css", type = "text/css")
 
         div("panel panel-primary ") {
-            id = "satListPanel"
-            style="opacity: 0;"
-            div("panel-heading") {
-                id="sat_list_heading"
-                h3("panel-title") { +"""Result List""" }
-                +"""Panel para buscar"""
-            }
+
+
             div("panel-body bg-primary") {
 
                 ul("list-group bg-primary") {

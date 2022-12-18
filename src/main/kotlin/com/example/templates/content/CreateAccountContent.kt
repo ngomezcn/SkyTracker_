@@ -7,40 +7,6 @@ import kotlinx.html.*
 
 class CreateAccountContent: Template<FlowContent> {
     override fun FlowContent.apply() {
-            /*form {
-                action = "api/create_account"
-                method = FormMethod.post
-
-                label { text("Title") }
-                input {
-                    type = InputType.text
-                    id = "title"
-                    name = ""
-                }
-                br { }
-                label { text("Year") }
-                input {
-                    type = InputType.text
-                    id = "year"
-                }
-                br { }
-                label { text("Gender") }
-                input {
-                    type = InputType.text
-                    id = "gender"
-                }
-                br { }
-                label { text("Director") }
-                input {
-                    type = InputType.text
-                    id = "director"
-                }
-                br { }
-                input {
-                    type = InputType.submit
-                }
-            }*/
-
 
         section("py-5") {
             div("container px-5") {
@@ -64,7 +30,7 @@ class CreateAccountContent: Template<FlowContent> {
                             form {
                                 action = "api/create_account"
                                 method = FormMethod.post
-                                encType = FormEncType.textPlain
+                                encType = FormEncType.multipartFormData
 
                                 div("form-floating mb-3") {
                                     input(classes = "form-control") {
@@ -80,7 +46,7 @@ class CreateAccountContent: Template<FlowContent> {
                                 div("form-floating mb-3") {
                                     input(classes = "form-control") {
                                         name = "firstName"
-                                        type = InputType.tel
+                                        type = InputType.text
                                         placeholder = "First name"
                                     }
                                     label {
@@ -91,7 +57,7 @@ class CreateAccountContent: Template<FlowContent> {
                                 div("form-floating mb-3") {
                                     input(classes = "form-control") {
                                         name = "surname"
-                                        type = InputType.tel
+                                        type = InputType.text
                                         placeholder = "Surname"
                                     }
                                     label {
@@ -113,7 +79,7 @@ class CreateAccountContent: Template<FlowContent> {
                                 div("form-floating mb-3") {
                                     input(classes = "form-control") {
                                         name = "password"
-                                        type = InputType.tel
+                                        type = InputType.password
                                         placeholder = "Password"
                                     }
                                     label {

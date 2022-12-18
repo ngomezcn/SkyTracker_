@@ -2,6 +2,7 @@ package com.example.templates
 
 import com.example.routes.web.WebRoutesEnum
 import com.example.templates.content.*
+import com.example.templates.content.ViewSatellite.ViewSatelliteContent
 import io.ktor.server.html.*
 import kotlinx.html.*
 import java.io.IOException
@@ -16,6 +17,7 @@ class LayoutTemplate: Template<HTML> {
     val satelliteListContent = TemplatePlaceholder<SatelliteListContent>()
     val viewSatelliteContent = TemplatePlaceholder<ViewSatelliteContent>()
     val createAccountContent = TemplatePlaceholder<CreateAccountContent>()
+    val signInContent = TemplatePlaceholder<SignInContent>()
     val homeContent = TemplatePlaceholder<HomeContent>()
 
     // Default structure
@@ -61,6 +63,7 @@ class LayoutTemplate: Template<HTML> {
         }
 
         body {
+            onLoad="onLoadDelayed()"
             insert(NavigationContent(), navigationContent)
             when(route) {
 
@@ -68,9 +71,13 @@ class LayoutTemplate: Template<HTML> {
                 WebRoutesEnum.satellites.route -> insert(SatelliteListContent(), satelliteListContent)
                 WebRoutesEnum.view_satellite.route -> insert(ViewSatelliteContent(), viewSatelliteContent)
                 WebRoutesEnum.create_account.route -> insert(CreateAccountContent(), createAccountContent)
+                WebRoutesEnum.sign_in.route -> insert(SignInContent(), signInContent)
             }
             if(route != WebRoutesEnum.satellites.route) {
-                insert(FooterContent(), footerContent)
+                //insert(FooterContent(), footerContent)
+            }
+            script {
+                src = "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             }
         }
     }
