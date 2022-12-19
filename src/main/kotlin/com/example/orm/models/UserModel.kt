@@ -10,7 +10,7 @@ object UsersTable : IntIdTable() {
     val username: Column<String> = varchar("username", 50)
     val firstName: Column<String> = varchar("firstName", 50)
     val surname: Column<String> = varchar("surname", 50)
-    val email: Column<String> = varchar("email", 50).uniqueIndex()
+    val email: Column<String> = varchar("email", 50) //.uniqueIndex() // https://github.com/JetBrains/Exposed/issues/803
     val password: Column<String> = varchar("password", 50)
     val sessionCookie: Column<String> = varchar("sessionCookie", 50)
 }

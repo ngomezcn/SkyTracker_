@@ -1,7 +1,9 @@
 package com.example.templates
 
 import com.example.routes.web.WebRoutesEnum
+import com.example.routes.web.account.AccountRoutesEnum
 import com.example.templates.content.*
+import com.example.templates.content.Account.TrackingList
 import com.example.templates.content.ViewSatellite.ViewSatelliteContent
 import io.ktor.server.html.*
 import kotlinx.html.*
@@ -19,6 +21,8 @@ class LayoutTemplate: Template<HTML> {
     val createAccountContent = TemplatePlaceholder<CreateAccountContent>()
     val signInContent = TemplatePlaceholder<SignInContent>()
     val homeContent = TemplatePlaceholder<HomeContent>()
+
+    val trackingList = TemplatePlaceholder<TrackingList>()
 
     // Default structure
     private val navigationContent = TemplatePlaceholder<NavigationContent>()
@@ -41,14 +45,14 @@ class LayoutTemplate: Template<HTML> {
             link {
                 rel = "icon"
                 type = "image/x-icon"
-                href = "assets/favicon.ico"
+                href = "/assets/favicon.ico"
             }
             link {
                 href = "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
                 rel = "stylesheet"
             }
             link {
-                href = "css/styles.css"
+                href = "/css/styles.css"
                 rel = "stylesheet"
             }
             link {
@@ -66,12 +70,12 @@ class LayoutTemplate: Template<HTML> {
             onLoad="onLoadDelayed()"
             insert(NavigationContent(), navigationContent)
             when(route) {
-
                 WebRoutesEnum.home.route -> insert(HomeContent(), homeContent)
                 WebRoutesEnum.satellites.route -> insert(SatelliteListContent(), satelliteListContent)
                 WebRoutesEnum.view_satellite.route -> insert(ViewSatelliteContent(), viewSatelliteContent)
                 WebRoutesEnum.create_account.route -> insert(CreateAccountContent(), createAccountContent)
                 WebRoutesEnum.sign_in.route -> insert(SignInContent(), signInContent)
+                AccountRoutesEnum.tracking_list.route -> insert(TrackingList(), trackingList)
             }
             if(route != WebRoutesEnum.satellites.route) {
                 //insert(FooterContent(), footerContent)

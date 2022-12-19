@@ -60,7 +60,6 @@ GROUP  BY CASE
         ELSE 'Others'
 END;
 */
-
         var leoCount = 0
         var meoCount = 0
         var heoCount = 0

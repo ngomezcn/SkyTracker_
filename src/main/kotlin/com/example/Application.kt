@@ -7,8 +7,7 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.example.plugins.*
-import io.ktor.server.plugins.contentnegotiation.*
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import io.ktor.server.resources.*
 import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.and
@@ -23,6 +22,7 @@ fun main() {
     ORM.loadInitialData()
 
     // ESTO ES SOLO TEMPORAL DURANTE EL DESARROLLO
+    // ***************************************************
     transaction {
         addLogger(StdOutSqlLogger)
 
@@ -34,12 +34,14 @@ fun main() {
             loggedUser =  UserDAO.wrapRows(query).toList().first()
         }
     }
+    // ***************************************************
 
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
         .start(wait = true)
 }
 
 fun Application.module() {
+    install(Resources)
     configureSerialization()
     configureRouting()
 }

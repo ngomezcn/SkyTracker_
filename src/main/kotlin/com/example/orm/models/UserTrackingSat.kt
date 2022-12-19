@@ -5,15 +5,25 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
+import org.jetbrains.exposed.sql.javatime.CurrentDateTime
+import org.jetbrains.exposed.sql.javatime.datetime
+import java.util.Date
 
-object SatCommentTable : IntIdTable() {
+object UserTrackingSatTable : IntIdTable() {
+
+    val idUser= reference("idUser", UsersTable)
+    val idSatellite = reference("idSatellite", SatellitesTable)
+    val trackingDate = datetime("trackingDate").defaultExpression(CurrentDateTime)
+}
+
+/*object SatCommentTable : IntIdTable() {
     //val idSatellite: Column<EntityID<Int>> = entityId("idSatellite", SatellitesTable)
     val idSatellite = reference("idSatellite", SatellitesTable)
     val idUser= reference("idUser", UsersTable)
 
     val comment: Column<String> = varchar("message", 1000)
     val imagePath: Column<String> = varchar("imagePath", 50)
-    //val upVotes: Column<Int> = integer("upVotes").default(0) // Esto va en una tabla separa para relacionar usuario con like y poder mostrarlo
+    val upVotes: Column<Int> = integer("upVotes").default(0)
 }
 
 class SatCommentDAO(id: EntityID<Int>) : IntEntity(id) {
@@ -23,6 +33,6 @@ class SatCommentDAO(id: EntityID<Int>) : IntEntity(id) {
 
     var comment by SatCommentTable.comment
     var imagePath by SatCommentTable.imagePath
-    //var upVotes by SatCommentTable.upVotes
+    var upVotes by SatCommentTable.upVotes
 
-}
+}*/

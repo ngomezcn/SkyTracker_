@@ -2,6 +2,8 @@ package com.example.routes.web
 
 import com.example.orm.models.SatelliteDAO
 import com.example.orm.models.SatellitesTable
+import com.example.routes.web.Satellites.SatelliteRouting
+import com.example.routes.web.account.accountWebRouting
 import com.example.templates.LayoutTemplate
 import io.ktor.server.application.*
 import io.ktor.server.html.*
@@ -10,6 +12,7 @@ import io.ktor.server.routing.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 fun Route.webRouting() {
+
     route("/") {
         get("/") {
             call.respondRedirect("/home")
@@ -33,7 +36,7 @@ fun Route.webRouting() {
             }
         }
 
-        get(WebRoutesEnum.satellites.toString()) {
+        /*get(WebRoutesEnum.satellites.toString()) {
             var requestedPage : Int? = null
 
             if(!call.request.queryParameters["page"].isNullOrBlank()) {
@@ -89,6 +92,9 @@ fun Route.webRouting() {
                     }
 
             }
-        }
+        }*/
     }
+
+    SatelliteRouting()
+    accountWebRouting()
 }

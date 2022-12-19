@@ -18,7 +18,6 @@ object ORM {
     fun connect() {
 
         val os = System.getProperty("os.name").lowercase()
-
         if(os.contains("windows")) {
             db = Database.connect(
                 "jdbc:postgresql://localhost:5432/postgres",
@@ -38,7 +37,7 @@ object ORM {
             )
             return
         }
-        
+
         db = Database.connect("jdbc:h2:mem:regular;DB_CLOSE_DELAY=-1;", "org.h2.Driver")
     }
 
@@ -47,8 +46,8 @@ object ORM {
             addLogger(StdOutSqlLogger)
 
             SchemaUtils.create(SatellitesTable)
-            SchemaUtils.create(SatCommentTable)
             SchemaUtils.create(UsersTable)
+            SchemaUtils.create(SatCommentTable)
         }
     }
 
@@ -57,8 +56,6 @@ object ORM {
 
         transaction {
             addLogger(StdOutSqlLogger)
-
-
             if(SatelliteDAO.all().count() < 100) {
                 SatellitesTable.dropStatement()
 

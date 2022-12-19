@@ -10,10 +10,7 @@ class UlSatelliteList(private val sats: List<SatelliteDAO>): Template<FlowConten
         link(rel = "stylesheet", href = "css/satList.css", type = "text/css")
 
         div("panel panel-primary ") {
-
-
             div("panel-body bg-primary") {
-
                 ul("list-group bg-primary") {
                     id="sat_list"
                     for (sat in sats) {
