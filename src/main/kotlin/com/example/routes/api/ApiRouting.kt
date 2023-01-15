@@ -2,6 +2,7 @@ package com.example.routes.api
 
 import com.example.loggedUser
 import com.example.orm.models.*
+import com.example.pathAssetsSats
 import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.server.application.*
@@ -10,6 +11,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.io.File
+import java.util.*
 
 fun Route.apiRouting() {
     route("api") {
@@ -87,8 +90,6 @@ fun Route.apiRouting() {
                 }
             }
 
-
-
             transaction {
                 addLogger(StdOutSqlLogger)
 
@@ -114,10 +115,10 @@ fun Route.apiRouting() {
             if(loggedUser == null)
                 call.respondRedirect("/sign_in")
 
-
             val data = call.receiveMultipart()
             var _idSatellite = ""
             var _comment = ""
+            var _imageName = ""
 
             data.forEachPart { part ->
                 when (part) {
@@ -127,7 +128,17 @@ fun Route.apiRouting() {
                             "message" -> _comment = part.value
                         }
                     }
-                    is PartData.FileItem -> {                    }
+                    is PartData.FileItem -> {
+                        var fileBytes = part.streamProvider().readBytes()
+
+                        if(fileBytes.isNotEmpty())
+                        {
+                            val uuid: UUID = UUID.randomUUID()
+                            _imageName =  loggedUser!!.email.take(5)+"_"+uuid.toString()+"."+part.originalFileName!!.substringAfterLast('.', "")
+
+                            File("$pathAssetsSats/$_imageName").writeBytes(fileBytes)
+                        }
+                    }
                     else -> {
                     }
                 }
@@ -158,7 +169,7 @@ fun Route.apiRouting() {
                     idSatellite = satToComment!!
                     idUser = loggedUser!!
                     comment = _comment
-                    imagePath = ""
+                    imageName = _imageName
                     upVotes = 0
                 }
             }

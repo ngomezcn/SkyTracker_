@@ -1,6 +1,5 @@
 package com.example.orm.models
 
-import com.example.orm.models.SatelliteDAO.Companion.referrersOn
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -13,7 +12,7 @@ object SatCommentTable : IntIdTable() {
     val idUser= reference("idUser", UsersTable)
 
     val comment: Column<String> = varchar("message", 1000)
-    val imagePath: Column<String> = varchar("imagePath", 50)
+    val imageName: Column<String> = varchar("imageName", 50)
     val upVotes: Column<Int> = integer("upVotes").default(0)
 }
 
@@ -23,7 +22,7 @@ class SatCommentDAO(id: EntityID<Int>) : IntEntity(id) {
     var idUser by UserDAO referencedOn SatCommentTable.idUser
 
     var comment by SatCommentTable.comment
-    var imagePath by SatCommentTable.imagePath
+    var imageName by SatCommentTable.imageName
     var upVotes by SatCommentTable.upVotes
 
 }

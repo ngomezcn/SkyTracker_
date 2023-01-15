@@ -62,7 +62,7 @@ class NavigationContent: Template<FlowContent> {
                                 {
                                     li {
                                         a(classes = "dropdown-item") {
-                                            +"""${loggedUser!!.surname}"""
+                                            +"""${loggedUser!!.email}"""
                                         }
                                     }
                                     li {

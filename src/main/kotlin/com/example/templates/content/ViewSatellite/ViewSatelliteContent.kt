@@ -4,6 +4,7 @@ import com.example.orm.models.SatCommentDAO
 import com.example.orm.models.SatCommentTable
 import com.example.orm.models.SatelliteDAO
 import com.example.orm.models.SatellitesTable
+import com.example.pathAssetsSats
 import io.ktor.server.html.*
 import kotlinx.html.*
 import org.jetbrains.exposed.sql.JoinType
@@ -82,11 +83,17 @@ class ViewSatelliteContent : Template<FlowContent> {
                 }
             }
         }
+        val path = "assets/sats/"
 
-        println("LISTA")
-        println(comments)
         for (c in comments) {
             p { + "${c.comment}" }
+
+            if(c.imageName.isNotBlank()) {
+                img {
+                    src = path + c.imageName
+                    height = "200px"
+                }
+            }
         }
     }
 }
