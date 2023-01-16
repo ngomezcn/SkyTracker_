@@ -1,9 +1,7 @@
 package com.example.templates.content.ViewSatellite
 
-import com.example.orm.models.SatCommentDAO
-import com.example.orm.models.SatCommentTable
-import com.example.orm.models.SatelliteDAO
-import com.example.orm.models.SatellitesTable
+import com.example.loggedUser
+import com.example.orm.models.*
 import com.example.pathAssetsSats
 import io.ktor.server.html.*
 import kotlinx.html.*
@@ -35,6 +33,39 @@ class ViewSatelliteContent : Template<FlowContent> {
         p { +sat.objectName!! }
         p { +sat.noradCatId!! }
 
+
+        var b = UserTrackingSatDAO.isSatTrackedByUser(satId = sat.id, userId = loggedUser!!.id)
+
+        if(b == null)
+        {
+            form {
+                div("form-group") {
+                    button(classes = "btn btn-primary mb-2") {
+                        type = ButtonType.reset
+                        +"""Tracked"""
+                    }
+                }
+            }
+        } else
+        {
+            form {
+                action = "api/track_satellite"
+                method = FormMethod.post
+                encType = FormEncType.multipartFormData
+
+                input {
+                    type = InputType.hidden
+                    name = "idSatellite"
+                    value = "${sat.id}"
+                }
+                div("form-group") {
+                    button(classes = "btn btn-primary mb-2") {
+                        type = ButtonType.submit
+                        +"""Track satellite """
+                    }
+                }
+            }
+        }
         section("py-5") {
             form {
                 action = "api/post_message"

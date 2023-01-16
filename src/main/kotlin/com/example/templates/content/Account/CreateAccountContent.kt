@@ -1,10 +1,11 @@
-package com.example.templates.content
+package com.example.templates.content.Account
 
+import io.ktor.http.*
 import io.ktor.server.html.*
 import kotlinx.html.FlowContent
 import kotlinx.html.*
 
-class SignInContent: Template<FlowContent> {
+class CreateAccountContent: Template<FlowContent> {
     override fun FlowContent.apply() {
 
         section("py-5") {
@@ -15,22 +16,55 @@ class SignInContent: Template<FlowContent> {
                             i("bi bi-envelope") {
                             }
                         }
-                        h1("fw-bolder") { +"""Sign In""" }
+                        h1("fw-bolder") { +"""Create Account""" }
                         p("lead fw-normal text-muted mb-0") {
-                            +"""Do not have an account?  """
+                            +"""Already have an account?  """
                             a(classes = "link-secondary") {
-                                href = "/create_account"
-                                +"""Create Account"""
+                                href = "/sign_in"
+                                +"""Log In"""
                             }
                         }
                     }
                     div("row gx-5 justify-content-center") {
                         div("col-lg-8 col-xl-6") {
                             form {
-                                action = "api/sign_in"
+                                action = "api/create_account"
                                 method = FormMethod.post
                                 encType = FormEncType.multipartFormData
 
+                                div("form-floating mb-3") {
+                                    input(classes = "form-control") {
+                                        name = "username"
+                                        type = InputType.text
+                                        placeholder = "Username"
+                                    }
+                                    label {
+                                        htmlFor = "username"
+                                        +"""Username"""
+                                    }
+                                }
+                                div("form-floating mb-3") {
+                                    input(classes = "form-control") {
+                                        name = "firstName"
+                                        type = InputType.text
+                                        placeholder = "First name"
+                                    }
+                                    label {
+                                        htmlFor = "firstName"
+                                        +"""First name"""
+                                    }
+                                }
+                                div("form-floating mb-3") {
+                                    input(classes = "form-control") {
+                                        name = "surname"
+                                        type = InputType.text
+                                        placeholder = "Surname"
+                                    }
+                                    label {
+                                        htmlFor = "surname"
+                                        +"""Surname"""
+                                    }
+                                }
                                 div("form-floating mb-3") {
                                     input(classes = "form-control") {
                                         name = "email"

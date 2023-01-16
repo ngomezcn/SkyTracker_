@@ -1,4 +1,4 @@
-package com.example.templates.content
+package com.example.templates.content.Base
 
 import com.example.loggedUser
 import io.ktor.server.html.*
@@ -45,7 +45,6 @@ class NavigationContent: Template<FlowContent> {
                             }
                         }
 
-
                         li("nav-item dropdown") {
 
                             a(classes = "nav-link dropdown-toggle") {
@@ -61,7 +60,7 @@ class NavigationContent: Template<FlowContent> {
                                 if(loggedUser != null)
                                 {
                                     li {
-                                        a(classes = "dropdown-item") {
+                                        p(classes = "dropdown-item") {
                                             +"""${loggedUser!!.email}"""
                                         }
                                     }
@@ -74,7 +73,7 @@ class NavigationContent: Template<FlowContent> {
                                     li {
                                         a(classes = "dropdown-item") {
                                             href = "account/settings"
-                                            +"""Settings"""
+                                            +"""Statistics"""
                                         }
                                     }
                                 } else
@@ -93,6 +92,4 @@ class NavigationContent: Template<FlowContent> {
             }
         }
     }
-
-
 }

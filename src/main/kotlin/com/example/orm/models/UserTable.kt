@@ -1,4 +1,4 @@
-package com.example.orm.models
+package com.example.orm.modelsoSatellite
 
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
@@ -10,7 +10,7 @@ object UsersTable : IntIdTable() {
     val username: Column<String> = varchar("username", 50)
     val firstName: Column<String> = varchar("firstName", 50)
     val surname: Column<String> = varchar("surname", 50)
-    val email: Column<String> = varchar("email", 50).uniqueIndex()
+    val email: Column<String> = varchar("email", 50) //.uniqueIndex() // SI PETA EN LINUX COMENTAR uniqueIndex
     val password: Column<String> = varchar("password", 50)
     val sessionCookie: Column<String> = varchar("sessionCookie", 50)
 }

@@ -1,4 +1,4 @@
-package com.example.templates.content
+package com.example.templates.content.Base
 
 import io.ktor.server.html.*
 import kotlinx.html.FlowContent

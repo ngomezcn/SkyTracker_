@@ -2,6 +2,8 @@ package com.example.routes.api
 
 import com.example.loggedUser
 import com.example.orm.models.*
+import com.example.orm.modelsoSatellite.UserDAO
+import com.example.orm.modelsoSatellite.UsersTable
 import com.example.pathAssetsSats
 import io.ktor.http.*
 import io.ktor.http.content.*
@@ -12,6 +14,8 @@ import io.ktor.server.routing.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.*
 
 fun Route.apiRouting() {
@@ -134,8 +138,8 @@ fun Route.apiRouting() {
                         if(fileBytes.isNotEmpty())
                         {
                             val uuid: UUID = UUID.randomUUID()
-                            _imageName =  loggedUser!!.email.take(5)+"_"+uuid.toString()+"."+part.originalFileName!!.substringAfterLast('.', "")
-
+                            _imageName =  loggedUser!!.email.take(4)+"-"+uuid.toString()+"."+part.originalFileName!!.substringAfterLast('.', "")
+                            Files.createDirectories(pathAssetsSats.toPath());
                             File("$pathAssetsSats/$_imageName").writeBytes(fileBytes)
                         }
                     }
@@ -175,6 +179,45 @@ fun Route.apiRouting() {
             }
 
             call.respondRedirect("/view_satellite?id="+satToComment!!.noradCatId)
+        }
+
+        post("track_satellite") {
+            if(loggedUser == null)
+                call.respondRedirect("/sign_in")
+
+            val data = call.receiveMultipart()
+            var _idSatellite = 0
+
+            data.forEachPart { part ->
+                when (part) {
+                    is PartData.FormItem -> {
+                        when (part.name){
+                            "idSatellite" -> _idSatellite = part.value.toInt()
+                        }
+                    }
+                    is PartData.FileItem -> {
+
+                    }
+                    else -> {
+                    }
+                }
+            }
+
+            var oSatellite: SatelliteDAO? = SatelliteDAO.getSatellite(_idSatellite)
+
+            if(oSatellite == null)
+            {
+                call.respond("Not found")
+            }
+
+            transaction {
+                UserTrackingSatDAO.new {
+                    idSatellite = oSatellite!!.id
+                    idUser = loggedUser!!.id
+                }
+            }
+
+            call.respondRedirect("/view_satellite?id="+oSatellite!!.noradCatId!!)
         }
     }
 }

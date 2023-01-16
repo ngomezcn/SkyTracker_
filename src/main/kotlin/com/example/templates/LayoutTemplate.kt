@@ -1,7 +1,14 @@
 package com.example.templates
 
+
 import com.example.routes.web.WebRoutesEnum
+import com.example.routes.web.account.AccountRoutesEnum
 import com.example.templates.content.*
+import com.example.templates.content.Account.CreateAccountContent
+import com.example.templates.content.Account.SignInContent
+import com.example.templates.content.Account.TrackingList
+import com.example.templates.content.Base.FooterContent
+import com.example.templates.content.Base.NavigationContent
 import com.example.templates.content.ViewSatellite.ViewSatelliteContent
 import io.ktor.server.html.*
 import kotlinx.html.*
@@ -19,6 +26,7 @@ class LayoutTemplate: Template<HTML> {
     val createAccountContent = TemplatePlaceholder<CreateAccountContent>()
     val signInContent = TemplatePlaceholder<SignInContent>()
     val homeContent = TemplatePlaceholder<HomeContent>()
+    val trackingList = TemplatePlaceholder<TrackingList>()
 
     // Default structure
     private val navigationContent = TemplatePlaceholder<NavigationContent>()
@@ -72,6 +80,8 @@ class LayoutTemplate: Template<HTML> {
                 WebRoutesEnum.view_satellite.route -> insert(ViewSatelliteContent(), viewSatelliteContent)
                 WebRoutesEnum.create_account.route -> insert(CreateAccountContent(), createAccountContent)
                 WebRoutesEnum.sign_in.route -> insert(SignInContent(), signInContent)
+                AccountRoutesEnum.tracking_list.route -> insert(TrackingList(), trackingList)
+
             }
             if(route != WebRoutesEnum.satellites.route) {
                 //insert(FooterContent(), footerContent)

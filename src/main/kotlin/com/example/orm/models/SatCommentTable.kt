@@ -1,5 +1,7 @@
 package com.example.orm.models
 
+import com.example.orm.modelsoSatellite.UserDAO
+import com.example.orm.modelsoSatellite.UsersTable
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -26,15 +28,3 @@ class SatCommentDAO(id: EntityID<Int>) : IntEntity(id) {
     var upVotes by SatCommentTable.upVotes
 
 }
-/*
-object fk_CommentSatellite : IntIdTable() {
-    val idComment: Column<String> = varchar("idComment", 1000)
-
-}
-
-class fk_CommentSatelliteDAO(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<fk_CommentSatelliteDAO>(fk_CommentSatellite)
-
-    var idComment by fk_CommentSatellite.idComment
-    var idSatellite by fk_CommentSatellite.idSatellite
-}*/

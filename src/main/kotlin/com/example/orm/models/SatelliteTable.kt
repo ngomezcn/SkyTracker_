@@ -5,6 +5,8 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
 
 object SatellitesTable : IntIdTable() { // https://www.space-track.org/basicspacedata/modeldef/class/gp/format/html
     val noradCatId: Column<String> = varchar("noradCatId",100)
@@ -21,7 +23,23 @@ object SatellitesTable : IntIdTable() { // https://www.space-track.org/basicspac
 }
 
 class SatelliteDAO(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<SatelliteDAO>(SatellitesTable)
+    companion object : IntEntityClass<SatelliteDAO>(SatellitesTable) {
+        fun getSatellite(id: Int) : SatelliteDAO?
+        {
+            var oSatellite: SatelliteDAO? = null
+            transaction {
+                val query = SatellitesTable.select {
+                    SatellitesTable.id eq id
+                }
+
+                if (SatelliteDAO.wrapRows(query).count().toInt() > 0) {
+                    oSatellite = SatelliteDAO.wrapRows(query).toList().first()
+                }
+            }
+
+            return oSatellite
+        }
+    }
 
     var noradCatId by SatellitesTable.noradCatId
     var objectName by SatellitesTable.objectName

@@ -1,8 +1,9 @@
 package com.example
 
 import com.example.orm.ORM
-import com.example.orm.models.UserDAO
-import com.example.orm.models.UsersTable
+import com.example.orm.modelsoSatellite.UserDAO
+import com.example.orm.modelsoSatellite.UsersTable
+
 import com.example.plugins.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -19,15 +20,14 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.io.path.Path
 
-
 /*
-* select T0.username, count(*)
+select T0.username, count(*)
 from users T0
 inner join satcomment T1
 on T0.id = T1."idUser"
 where T0.email = 'naimgomezcn@gmail.com'
 group by T0.username
-* */
+*/
 
 var loggedUser : UserDAO? = null
 

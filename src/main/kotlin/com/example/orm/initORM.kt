@@ -1,10 +1,8 @@
 package com.example.orm
 
 import com.example.models.SpaceTrack.STSatelliteCatalog
-import com.example.orm.models.SatCommentTable
-import com.example.orm.models.SatelliteDAO
-import com.example.orm.models.SatellitesTable
-import com.example.orm.models.UsersTable
+import com.example.orm.models.*
+import com.example.orm.modelsoSatellite.UsersTable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.*
@@ -49,6 +47,7 @@ object ORM {
             SchemaUtils.create(SatellitesTable)
             SchemaUtils.create(SatCommentTable)
             SchemaUtils.create(UsersTable)
+            SchemaUtils.create(UserTrackingSatTable)
         }
     }
 
@@ -57,8 +56,6 @@ object ORM {
 
         transaction {
             addLogger(StdOutSqlLogger)
-
-
             if(SatelliteDAO.all().count() < 100) {
                 SatellitesTable.dropStatement()
 
