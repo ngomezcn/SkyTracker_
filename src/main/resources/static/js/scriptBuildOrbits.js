@@ -54,7 +54,7 @@ function unityShowBanner(msg, type) {
     updateBannerVisibility();
 }
 
-var buildUrl = "3d/Build";
+var buildUrl = "/3d/Build";
 var loaderUrl = buildUrl + "/3d.loader.js";
 var config = {
     dataUrl: buildUrl + "/3d.data",

@@ -14,29 +14,3 @@ data class CreateAccountModel(val username: String, val firstName: String, val s
 @Serializable
 data class Customer(val id: String, val firstName: String, val lastName: String, val email: String)
 
-fun Route.customerRouting() {
-    route("/customer") {
-        get {
-
-        }
-        get("{id?}") {
-
-        }
-        post {
-            println("WTF")
-
-            try {
-                val customer = call.receive<Customer>()
-                println(customer)
-            } catch (e: Exception)
-            {
-                println(e)
-            }
-            //customerStorage.add(customer)
-            call.respondText("Customer stored correctly", status = HttpStatusCode.Created)
-        }
-        delete("{id?}") {
-
-        }
-    }
-}

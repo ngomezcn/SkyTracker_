@@ -23,6 +23,10 @@ repositories {
 
 
 dependencies {
+
+    implementation("io.ktor:ktor-server-openapi:$ktor_version")
+    implementation("io.swagger.codegen.v3:swagger-codegen-generators:1.0.0")
+
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
@@ -43,4 +47,9 @@ dependencies {
     implementation("org.jetbrains.exposed", "exposed-dao", "0.40.1")
     implementation("org.jetbrains.exposed", "exposed-jdbc", "0.40.1")
     implementation("org.jetbrains.exposed:exposed-java-time:0.40.1")
+
+    implementation("io.ktor:ktor-server-swagger:2.2.2")
+    implementation("io.ktor:ktor-server-cors:$ktor_version")
+    implementation("io.ktor:ktor-server-resources:$ktor_version")
+
 }

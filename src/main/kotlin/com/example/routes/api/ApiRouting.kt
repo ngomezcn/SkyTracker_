@@ -1,7 +1,7 @@
 package com.example.routes.api
 
 import com.example.loggedUser
-import com.example.orm.models.*
+import com.example.orm.tables.*
 import com.example.orm.modelsoSatellite.UserDAO
 import com.example.orm.modelsoSatellite.UsersTable
 import com.example.pathAssetsSats
@@ -15,7 +15,6 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.io.File
 import java.nio.file.Files
-import java.nio.file.Paths
 import java.util.*
 
 fun Route.apiRouting() {

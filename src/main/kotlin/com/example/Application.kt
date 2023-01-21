@@ -1,5 +1,6 @@
 package com.example
 
+import com.example.newRoutes.Satellites
 import com.example.orm.ORM
 import com.example.orm.modelsoSatellite.UserDAO
 import com.example.orm.modelsoSatellite.UsersTable
@@ -8,7 +9,6 @@ import com.example.plugins.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.util.*
 import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.addLogger
@@ -16,9 +16,9 @@ import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.io.File
-import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.io.path.Path
+import io.ktor.server.plugins.cors.routing.*
+import io.ktor.server.resources.*
 
 /*
 select T0.username, count(*)
@@ -38,9 +38,11 @@ fun main() {
         .start(wait = true)
 }
 
+//fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+
 fun Application.module() {
 
-    ORM.connect()
+   ORM.connect()
     ORM.createSchemas()
     ORM.loadInitialData()
 
@@ -56,8 +58,10 @@ fun Application.module() {
             loggedUser =  UserDAO.wrapRows(query).toList().first()
         }
     }
+    // === == == == == =
 
-
+    install(CORS)
+    install(Resources)
     configureSerialization()
     configureRouting()
 }

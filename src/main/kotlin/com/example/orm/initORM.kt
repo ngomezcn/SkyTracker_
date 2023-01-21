@@ -1,7 +1,7 @@
 package com.example.orm
 
 import com.example.models.SpaceTrack.STSatelliteCatalog
-import com.example.orm.models.*
+import com.example.orm.tables.*
 import com.example.orm.modelsoSatellite.UsersTable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
